@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="about-yonqui-section py-5">
+  <div class="container">
+    <div class="row justify-content-center align-items-center">
+      <div class="col-lg-7 col-md-10 animate__animated animate__fadeIn">
+        <div class="bg-white rounded shadow-lg p-4 mb-4">
+          <h1 class="mb-3" style="color:#1e5631; font-family: 'Playfair Display', serif; letter-spacing:1px;">About Yonqui</h1>
+          <h4 class="mb-3" style="color:#27ae60;">Yoruba Nation Quintessentials (Yonqui)</h4>
+          <p class="lead">Yonqui is a vibrant, forward-thinking community dedicated to the empowerment, unity, and global advancement of the Yoruba people. Our mission is to foster cultural pride, professional excellence, and social impact among Yoruba descendants worldwide.</p>
+          <hr>
+          <h5 class="mt-4 mb-2" style="color:#1e5631;">Our Vision</h5>
+          <p>To be the leading network for Yoruba professionals, creatives, and advocates, championing heritage, innovation, and positive change.</p>
+          <h5 class="mt-4 mb-2" style="color:#1e5631;">Our Mission</h5>
+          <ul class="mb-4">
+            <li>Connect Yoruba individuals and organizations globally</li>
+            <li>Promote Yoruba culture, language, and values</li>
+            <li>Support professional growth, mentorship, and entrepreneurship</li>
+            <li>Organize events, workshops, and cultural festivals</li>
+            <li>Advocate for social justice, education, and economic empowerment</li>
+          </ul>
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <div class="p-3 bg-light rounded h-100">
+                <h6 class="text-uppercase" style="color:#27ae60;">Why Join Yonqui?</h6>
+                <ul class="mb-0">
+                  <li>Exclusive access to resources and opportunities</li>
+                  <li>Networking with like-minded Yoruba professionals</li>
+                  <li>Mentorship and career support</li>
+                  <li>Celebrate and preserve Yoruba heritage</li>
+                  <li>Contribute to impactful community projects</li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-md-6 mb-3">
+              <div class="p-3 bg-light rounded h-100">
+                <h6 class="text-uppercase" style="color:#27ae60;">Who Can Join?</h6>
+                <ul class="mb-0">
+                  <li>Yoruba professionals, students, and creatives</li>
+                  <li>Organizations and businesses with Yoruba interests</li>
+                  <li>Allies and supporters of Yoruba advancement</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="text-center mt-4">
+            <a href="/membership/apply-membership/" class="btn btn-success btn-lg px-4" style="background:#27ae60; border:none;">Apply for Membership</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+<style>
+  .about-yonqui-section {
+    background: linear-gradient(135deg, #f8fafc 0%, #e6f2ea 100%);
+    min-height: 80vh;
+  }
+  @media (max-width: 767px) {
+    .about-yonqui-section .container { padding: 0 0.5rem; }
+    .about-yonqui-section h1 { font-size: 2rem; }
+    .about-yonqui-section h4 { font-size: 1.2rem; }
+  }
+</style>
+{% endblock %}

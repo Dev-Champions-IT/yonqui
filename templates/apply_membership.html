@@ -1,0 +1,329 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% load static %}
+
+{% block content %}
+<section class="membership-bg py-5">
+  <div class="container membership-container">
+    <div class="card membership-card shadow-lg border-0 animate__animated animate__fadeIn">
+
+      <div class="card-header membership-header text-center text-white">
+        <h2 class="membership-title mb-1">Yonqui Membership Application</h2>
+        <p class="mb-0 membership-subtitle">Yoruba Nation Quintessentials</p>
+      </div>
+
+      <div class="card-body p-4 p-md-5">
+        <form method="post" enctype="multipart/form-data" novalidate autocomplete="off">
+          {% csrf_token %}
+
+          <div class="row g-4 form-grid">
+            {% for field in form %}
+
+              {# CHECKBOX #}
+              {% if field.field.widget.input_type == 'checkbox' %}
+                <div class="col-12 membership-form-group mb-4">
+                  <div class="form-check">
+                    {{ field }}
+                    <label class="form-check-label ms-2" for="{{ field.id_for_label }}">
+                      {{ field.label }}
+                      {% if field.field.required %}<span class="text-danger">*</span>{% endif %}
+                    </label>
+                  </div>
+
+                  {% if field.help_text %}
+                    <div class="form-text ms-4">{{ field.help_text }}</div>
+                  {% endif %}
+
+                  {% for error in field.errors %}
+                    <div class="invalid-feedback d-block ms-4">{{ error }}</div>
+                  {% endfor %}
+                </div>
+
+              {# FILE #}
+              {% elif field.field.widget.input_type == 'file' %}
+                <div class="col-12 membership-form-group mb-4">
+                  <label class="form-label fw-semibold" for="{{ field.id_for_label }}">
+                    {{ field.label }}
+                    {% if field.field.required %}<span class="text-danger">*</span>{% endif %}
+                  </label>
+
+                  {{ field }}
+
+                  {% if field.help_text %}
+                    <div class="form-text">{{ field.help_text }}</div>
+                  {% endif %}
+
+                  {% for error in field.errors %}
+                    <div class="invalid-feedback d-block">{{ error }}</div>
+                  {% endfor %}
+                </div>
+
+              {# TEXTAREA / BIG FIELDS #}
+              {% elif field.field.widget.input_type == 'textarea' %}
+                <div class="col-12 membership-form-group mb-4">
+                  <label class="form-label fw-semibold" for="{{ field.id_for_label }}">
+                    {{ field.label }}
+                    {% if field.field.required %}<span class="text-danger">*</span>{% endif %}
+                  </label>
+
+                  {{ field }}
+
+                  {% if field.help_text %}
+                    <div class="form-text">{{ field.help_text }}</div>
+                  {% endif %}
+
+                  {% for error in field.errors %}
+                    <div class="invalid-feedback d-block">{{ error }}</div>
+                  {% endfor %}
+                </div>
+
+              {# DEFAULT INPUTS #}
+              {% else %}
+                {# Force full-width for Phone, Address, Reason for joining #}
+                {% if field.name == "phone" or field.name == "address" or field.name == "reason_for_joining" %}
+                  <div class="col-12 membership-form-group mb-4">
+                {% else %}
+                  <div class="col-12 col-md-6 membership-form-group mb-4">
+                {% endif %}
+
+                    <label class="form-label fw-semibold" for="{{ field.id_for_label }}">
+                      {{ field.label }}
+                      {% if field.field.required %}<span class="text-danger">*</span>{% endif %}
+                    </label>
+
+                    {{ field }}
+
+                    {% if field.help_text %}
+                      <div class="form-text">{{ field.help_text }}</div>
+                    {% endif %}
+
+                    {% for error in field.errors %}
+                      <div class="invalid-feedback d-block">{{ error }}</div>
+                    {% endfor %}
+                  </div>
+              {% endif %}
+
+            {% endfor %}
+          </div>
+
+          <div class="mt-4 pt-2">
+            <button type="submit" class="btn btn-lg w-100 membership-btn">
+              Apply for Membership
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="text-center mt-4 text-muted small">
+      <i class="fa fa-lock me-1"></i>
+      Your information is confidential and used only for Yonqui membership verification.
+    </div>
+  </div>
+</section>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+<style>
+  .membership-bg{
+    background: radial-gradient(1200px circle at 20% 10%, rgba(30,86,49,.10), transparent 55%),
+                linear-gradient(135deg, #f8fafc 0%, #e6f2ea 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+  }
+
+  .membership-container{
+    max-width: 760px;
+  }
+
+  .membership-card{
+    border-radius: 18px;
+    overflow: hidden;
+  }
+
+  .membership-header{
+    background: linear-gradient(135deg, #1e5631, #1b4d2c);
+    padding: 1.75rem 1.25rem;
+  }
+
+  .membership-title{
+    font-family: "Playfair Display", serif;
+    letter-spacing: .5px;
+    font-weight: 700;
+    font-size: clamp(1.35rem, 2.5vw, 1.85rem);
+  }
+
+  .membership-subtitle{
+    opacity: .95;
+    font-size: 1rem;
+  }
+
+  .membership-btn{
+    background:#1e5631;
+    color:#fff;
+    font-weight: 700;
+    letter-spacing: .6px;
+    padding: .95rem 1.2rem;
+    border-radius: 12px;
+    border: 0;
+  }
+
+  .membership-btn:hover{
+    background:#184728;
+    color:#fff;
+  }
+
+  .form-control:focus,
+  .form-select:focus,
+  .form-check-input:focus,
+  .membership-btn:focus{
+    box-shadow: 0 0 0 .25rem rgba(30,86,49,.16);
+    border-color: rgba(30,86,49,.4);
+  }
+
+  /* Make Django default widgets look consistent even if no classes exist */
+
+  /* Consistent border radius for ALL form elements in membership form */
+  .membership-card input[type="text"],
+  .membership-card input[type="email"],
+  .membership-card input[type="number"],
+  .membership-card input[type="password"],
+  .membership-card input[type="date"],
+  .membership-card input[type="tel"],
+  .membership-card input[type="url"],
+  .membership-card textarea,
+  .membership-card select,
+  .membership-card input[type="file"],
+  .membership-card .form-control,
+  .membership-card .form-select,
+  .membership-card .custom-file-input,
+  .membership-card .custom-file-label,
+  .membership-card .form-check-input,
+  .membership-card input[type="checkbox"],
+  .membership-card input[type="radio"] {
+    border-radius: 12px !important;
+  }
+
+    /* Ensure all select elements fill their container width */
+    .membership-card select,
+    .membership-card .form-select {
+      width: 100%;
+    }
+
+  /* ===============================
+     FORM SPACING & RHYTHM
+  ================================ */
+
+  /* Label spacing */
+  .form-label{
+    letter-spacing: .2px;
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+  }
+
+  /* Inputs spacing & size */
+  .form-control,
+  .form-select{
+    padding: 0.7rem 0.9rem;
+    font-size: 0.95rem;
+    min-height: 48px;
+  }
+
+  /* Textarea breathing room */
+  textarea.form-control{
+    min-height: 140px;
+    resize: vertical;
+  }
+
+  /* Help text spacing */
+  .form-text{
+    margin-top: 0.4rem;
+    font-size: 0.85rem;
+  }
+
+  /* Error spacing */
+  .invalid-feedback{
+    margin-top: 0.4rem;
+    font-size: 0.85rem;
+  }
+
+  /* Checkbox spacing */
+  .form-check{
+    padding-top: 0.35rem;
+    padding-bottom: 0.35rem;
+  }
+
+  .form-check-label{
+    line-height: 1.4;
+  }
+
+  /* Card body vertical rhythm */
+  .membership-card .card-body{
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+
+  /* Desktop horizontal breathing space */
+  @media (min-width: 768px){
+    .form-grid > .col-md-6{
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+  }
+
+  /* Mobile refinements */
+  @media (max-width: 576px){
+    .membership-bg{
+      padding-top: 2.5rem;
+      padding-bottom: 2.5rem;
+    }
+
+    .membership-header{
+      padding: 1.35rem 1rem;
+    }
+
+    .membership-card .card-body{
+      padding-top: 2rem;
+      padding-bottom: 2rem;
+    }
+  }
+  /* Add vertical spacing between form fields */
+  .membership-form-group {
+    margin-bottom: 1.5rem !important;
+  }
+</style>
+
+<script>
+  // Auto-apply Bootstrap classes to Django-rendered fields (no extra package needed)
+  (function () {
+    const form = document.querySelector(".membership-card form");
+    if (!form) return;
+
+    form.querySelectorAll("input, textarea, select").forEach((el) => {
+      const type = (el.getAttribute("type") || "").toLowerCase();
+
+      // Skip hidden + csrf
+      if (type === "hidden") return;
+
+      if (type === "checkbox") {
+        el.classList.add("form-check-input");
+        return;
+      }
+
+      if (type === "file") {
+        el.classList.add("form-control");
+        return;
+      }
+
+      if (el.tagName.toLowerCase() === "select") {
+        el.classList.add("form-select");
+        return;
+      }
+
+      el.classList.add("form-control");
+    });
+  })();
+</script>
+{% endblock %}
