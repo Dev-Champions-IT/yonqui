@@ -56,12 +56,12 @@
             </form>
           </div>
           <div class="col-4 d-flex justify-content-end align-items-center">
-            <a
+            {% comment %} <a
               class="btn btn-link font-weight-bold me-3"
               style="color: #1e5631; font-size: 1.1rem; text-decoration: none"
               href="/about/"
               >About Us</a
-            >
+            > {% endcomment %}
             {% if not user.is_authenticated %}
             <a class="btn btn-sm btn-warning" href="{% url 'login' %}">Login</a>
             &nbsp;
