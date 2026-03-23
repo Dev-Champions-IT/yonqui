@@ -99,7 +99,7 @@ def edit_post(request, pk):
     form = BlogPostForm(instance=post)
     context = {
         'form': form,
-        'post': post
+        'post': post,
     }
     return render(request, 'dashboard/edit_post.html', context)
 
